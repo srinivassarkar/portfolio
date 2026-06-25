@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Srinivas Sarkar | DevOps Engineer & Cloud Architect</title>
+  <meta name="description" content="Portfolio of Srinivas Sarkar, DevOps Engineer & Cloud Architect. Clean, modern, and minimalist developer portfolio with terminal aesthetics.">
+  
+  <!-- Premium Monospace Font for Code/Terminal feel and Clean Body Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- COLOR GRADING & VARIABLES (TERMINAL ACCENTS) --- */
+    :root {
+      --bg-dark: #080b11;
+      --bg-card: #0f1420;
+      --bg-pill: #171f30;
+      --border-color: #1e293b;
+      --border-hover: #334155;
+      
+      /* Terminal Color Grading */
+      --color-green: #10b981; /* Emerald/Phosphor Green */
+      --color-green-glow: rgba(16, 185, 129, 0.15);
+      --color-amber: #facc15; /* Warm Gold/Amber */
+      --color-amber-glow: rgba(250, 204, 21, 0.1);
+      
+      /* Text Grading */
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --font-mono: 'Fira Code', monospace;
+      --font-body: 'Inter', sans-serif;
+      
+      --max-width: 900px;
+      --transition-speed: 0.2s;
+    }
+
+    /* --- RESET & LAYOUT --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* --- FLOATING HEADER --- */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(8, 11, 17, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 100;
+      padding: 16px 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-mono);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--color-green);
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      transition: color var(--transition-speed);
+    }
+
+    nav a:hover {
+      color: var(--color-green);
+    }
+
+    /* --- HERO INTRO --- */
+    .hero {
+      padding: 70px 0 50px 0;
+      position: relative;
+    }
+
+    /* Subtle Terminal Scanline Overlay on Background */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(rgba(16, 185, 129, 0.01) 50%, transparent 50%);
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-content {
+      max-width: 750px;
+    }
+
+    .hero-title {
+      font-family: var(--font-mono);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .hero-title span {
+      color: var(--color-green);
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-mono);
+      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      font-weight: 600;
+      color: var(--color-amber);
+      margin-bottom: 20px;
+    }
+
+    .hero-bio {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all var(--transition-speed);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: var(--color-green);
+      color: #041d13;
+    }
+
+    .btn-primary:hover {
+      background-color: #059669;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(16, 185, 129, 0.15);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      background-color: transparent;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-amber);
+      background-color: var(--color-amber-glow);
+      transform: translateY(-2px);
+    }
+
+    /* --- PROFILE BIO CALLOUT --- */
+    .profile-summary {
+      padding: 40px 0;
+    }
+
+    .callout-box {
+      background: rgba(15, 20, 32, 0.6);
+      border-left: 3px solid var(--color-green);
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      border-radius: 0 6px 6px 0;
+      padding: 24px;
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+    }
+
+    .callout-box strong {
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    /* --- SECTION SYSTEM TITLES --- */
+    .section-title {
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex-grow: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    .section-title span.cmd {
+      color: var(--color-green);
+    }
+
+    .section-title span.param {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* --- SKILLS SECTION --- */
+    .skills {
+      padding: 40px 0;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .skill-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 20px;
+      transition: all var(--transition-speed);
+    }
+
+    .skill-card:hover {
+      border-color: var(--color-green);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.04);
+    }
+
+    .skill-category-title {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skill-category-title span.icon {
+      color: var(--color-amber);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-tag {
+      background-color: var(--bg-pill);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      transition: all var(--transition-speed);
+    }
+
+    .skill-tag:hover {
+      color: var(--color-amber);
+      border-color: var(--color-amber);
+      background-color: var(--color-amber-glow);
+    }
+
+    /* --- PROJECTS SECTION --- */
+    .projects {
+      padding: 40px 0;
+    }
+
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .project-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 24px;
+      transition: all var(--transition-speed);
+    }
+
+    .project-card:hover {
+      border-color: var(--color-green);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.04);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 16px;
+    }
+
+    .project-title {
+      font-family: var(--font-mono);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color var(--transition-speed);
+    }
+
+    .project-title:hover {
+      color: var(--color-green);
+    }
+
+    .project-repo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--color-green);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      background-color: var(--color-green-soft);
+      padding: 4px 10px;
+      border-radius: 4px;
+      transition: all var(--transition-speed);
+    }
+
+    .project-repo-link:hover {
+      border-color: var(--color-green);
+      background-color: var(--color-green);
+      color: #041d13;
+    }
+
+    .project-description {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+    }
+
+    .project-deliverables {
+      background-color: rgba(8, 11, 17, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .deliverables-title {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .deliverables-list {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .deliverable-item {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .deliverable-item::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      color: var(--color-green);
+      font-family: var(--font-mono);
+    }
+
+    .project-tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-tech-tag {
+      background-color: var(--bg-pill);
+      border: 1px solid var(--border-color);
+      color: var(--color-amber);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    /* --- CONTACT SECTION --- */
+    .contact {
+      padding: 40px 0 80px 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .contact-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all var(--transition-speed);
+    }
+
+    .contact-card:hover {
+      border-color: var(--color-amber);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(250, 204, 21, 0.03);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .contact-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--color-green);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .contact-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-amber);
+      background-color: transparent;
+      border: 1px solid rgba(250, 204, 21, 0.3);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all var(--transition-speed);
+    }
+
+    .contact-btn:hover {
+      color: #05070a;
+      background-color: var(--color-amber);
+      border-color: var(--color-amber);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 30px 0;
+      text-align: center;
+      background-color: #06080d;
+    }
+
+    footer p {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Nav Bar -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo">srinivas<span>.</span>sre</a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Intro Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <h1 class="hero-title">Srinivas <span>Sarkar</span></h1>
+      <h2 class="hero-subtitle">DevOps Engineer & Cloud Architect</h2>
+      <p class="hero-bio">
+        Specialized in Kubernetes, AWS, GitOps, and building production-grade infrastructure. I focus on automating software delivery cycles, improving platform security, and engineering resilient observability planes.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Callout Section -->
+  <section id="about" class="profile-summary">
+    <div class="container">
+      <div class="callout-box">
+        <strong>Transitioning from Node.js development to DevOps engineering.</strong> I bring a strong background in software engineering into operations. My architectural approach prioritizes security, automation, and full-stack observability, ensuring production stability while keeping systems clean and simple.
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Expertise Section -->
+  <section id="skills" class="skills">
+    <div class="container">
+      <h2 class="section-title"><span class="cmd">cat</span> <span class="param">technical_expertise.sh</span></h2>
+      <div class="skills-grid">
+        
+        <!-- Category 1 -->
+        <div class="skill-card">
+          <h3 class="skill-category-title"><span class="icon">☁️</span> Cloud & Infrastructure</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS EKS</span>
+            <span class="skill-tag">Terraform</span>
+            <span class="skill-tag">VPC Design</span>
+            <span class="skill-tag">IAM/IRSA</span>
+            <span class="skill-tag">ECR</span>
+          </div>
+        </div>
+
+        <!-- Category 2 -->
+        <div class="skill-card">
+          <h3 class="skill-category-title"><span class="icon">☸️</span> Kubernetes & GitOps</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">ArgoCD</span>
+            <span class="skill-tag">Kustomize</span>
+            <span class="skill-tag">Helm</span>
+            <span class="skill-tag">ApplicationSets</span>
+            <span class="skill-tag">Multi-cluster</span>
+          </div>
+        </div>
+
+        <!-- Category 3 -->
+        <div class="skill-card">
+          <h3 class="skill-category-title"><span class="icon">📊</span> Full-Stack Observability</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Prometheus</span>
+            <span class="skill-tag">Grafana</span>
+            <span class="skill-tag">Loki</span>
+            <span class="skill-tag">Jaeger</span>
+            <span class="skill-tag">OpenTelemetry</span>
+          </div>
+        </div>
+
+        <!-- Category 4 -->
+        <div class="skill-card">
+          <h3 class="skill-category-title"><span class="icon">🔒</span> CI/CD & DevSecOps</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">GitHub Actions</span>
+            <span class="skill-tag">OIDC</span>
+            <span class="skill-tag">Trivy</span>
+            <span class="skill-tag">cert-manager</span>
+            <span class="skill-tag">NGINX Ingress</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Missions Section -->
+  <section id="projects" class="projects">
+    <div class="container">
+      <h2 class="section-title"><span class="cmd">./list_projects</span> <span class="param">--verbose</span></h2>
+      <div class="projects-list">
+        
+        <!-- Project 1 -->
+        <article class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">ArgoCD Hub-Spoke Multi-Cluster Architecture</h3>
+            <a href="https://github.com/SrinivasSarkar/argocd-hub-spoke-eks" class="project-repo-link" target="_blank">
+              GitHub →
+            </a>
+          </div>
+          <p class="project-description">
+            Production-grade GitOps implementation featuring automated TLS certificate management, multi-cluster orchestration, and zero-downtime deployments using ArgoCD ApplicationSets on AWS EKS.
+          </p>
+          <div class="project-deliverables">
+            <div class="deliverables-title">Key Accomplishments</div>
+            <ul class="deliverables-list">
+              <li class="deliverable-item">Implemented hub-spoke topology managing multiple EKS clusters from a single ArgoCD instance.</li>
+              <li class="deliverable-item">Automated TLS certificate management using cert-manager with Let's Encrypt.</li>
+              <li class="deliverable-item">Configured SSL passthrough with NGINX Ingress for full gRPC support.</li>
+              <li class="deliverable-item">Built ApplicationSet patterns for automatic multi-cluster deployments.</li>
+              <li class="deliverable-item">Created automated tooling installation script for reproducible environments.</li>
+            </ul>
+          </div>
+          <div class="project-tech-stack">
+            <span class="project-tech-tag">AWS EKS</span>
+            <span class="project-tech-tag">ArgoCD</span>
+            <span class="project-tech-tag">ApplicationSets</span>
+            <span class="project-tech-tag">cert-manager</span>
+            <span class="project-tech-tag">NGINX Ingress</span>
+            <span class="project-tech-tag">Helm</span>
+            <span class="project-tech-tag">eksctl</span>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">Kubernetes Observability Stack for Microservices</h3>
+            <a href="https://github.com/SrinivasSarkar/k8s-observability" class="project-repo-link" target="_blank">
+              GitHub →
+            </a>
+          </div>
+          <p class="project-description">
+            End-to-end observability setup for a Kubernetes-based microservices application with metrics, logs, distributed tracing, and load testing in a production-like environment.
+          </p>
+          <div class="project-deliverables">
+            <div class="deliverables-title">Key Accomplishments</div>
+            <ul class="deliverables-list">
+              <li class="deliverable-item">Deployed complete observability stack: Prometheus, Grafana, Loki, and Jaeger.</li>
+              <li class="deliverable-item">Implemented centralized logging with Loki and Promtail across all namespaces.</li>
+              <li class="deliverable-item">Configured distributed tracing backend with OpenTelemetry Collector.</li>
+              <li class="deliverable-item">Built distributed load testing setup using Locust master-worker architecture.</li>
+              <li class="deliverable-item">Documented real-world troubleshooting and production-style debugging.</li>
+            </ul>
+          </div>
+          <div class="project-tech-stack">
+            <span class="project-tech-tag">Kubernetes</span>
+            <span class="project-tech-tag">Prometheus</span>
+            <span class="project-tech-tag">Grafana</span>
+            <span class="project-tech-tag">Loki</span>
+            <span class="project-tech-tag">Jaeger</span>
+            <span class="project-tech-tag">OpenTelemetry</span>
+            <span class="project-tech-tag">Locust</span>
+            <span class="project-tech-tag">Kind</span>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">Secure GitOps CI/CD Pipeline on AWS EKS</h3>
+            <a href="https://github.com/SrinivasSarkar/color-palette-eks-ci-cd" class="project-repo-link" target="_blank">
+              GitHub →
+            </a>
+          </div>
+          <p class="project-description">
+            Production-grade DevSecOps project demonstrating secure, automated deployment pipeline using Terraform, AWS EKS, GitHub Actions OIDC, and ArgoCD following GitOps principles.
+          </p>
+          <div class="project-deliverables">
+            <div class="deliverables-title">Key Accomplishments</div>
+            <ul class="deliverables-list">
+              <li class="deliverable-item">Implemented zero-credential CI/CD using GitHub Actions OIDC with AWS IAM.</li>
+              <li class="deliverable-item">Built complete Terraform modules for VPC, EKS, and ECR with IRSA.</li>
+              <li class="deliverable-item">Configured immutable container images with automated SHA-based tagging.</li>
+              <li class="deliverable-item">Integrated security scanning: SAST (Semgrep), dependency audit, and Trivy image scanning.</li>
+              <li class="deliverable-item">Achieved true GitOps with auto-sync, drift detection, and self-healing.</li>
+              <li class="deliverable-item">Documented real-world challenges: IAM access entries, IRSA trust policies, LoadBalancer behavior.</li>
+            </ul>
+          </div>
+          <div class="project-tech-stack">
+            <span class="project-tech-tag">AWS EKS</span>
+            <span class="project-tech-tag">Terraform</span>
+            <span class="project-tech-tag">GitHub Actions</span>
+            <span class="project-tech-tag">ArgoCD</span>
+            <span class="project-tech-tag">Kustomize</span>
+            <span class="project-tech-tag">OIDC</span>
+            <span class="project-tech-tag">IRSA</span>
+            <span class="project-tech-tag">ECR</span>
+            <span class="project-tech-tag">Trivy</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Channels Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2 class="section-title"><span class="cmd">ping</span> <span class="param">contact_channels</span></h2>
+      <div class="contact-grid">
+        
+        <!-- Email -->
+        <div class="contact-card">
+          <div class="contact-info">
+            <span class="contact-label">Email</span>
+            <span class="contact-desc">Send a direct message</span>
+          </div>
+          <a href="mailto:srinivassarkar07@gmail.com" class="contact-btn">srinivassarkar07@gmail.com</a>
+        </div>
+
+        <!-- LinkedIn -->
+        <div class="contact-card">
+          <div class="contact-info">
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-desc">Connect professionally</span>
+          </div>
+          <a href="https://linkedin.com/in/srinivassarkar-049320212/" target="_blank" class="contact-btn">Connect on LinkedIn</a>
+        </div>
+
+        <!-- GitHub -->
+        <div class="contact-card">
+          <div class="contact-info">
+            <span class="contact-label">GitHub</span>
+            <span class="contact-desc">View code repositories</span>
+          </div>
+          <a href="https://github.com/SrinivasSarkar" target="_blank" class="contact-btn">View GitHub Profile</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Stamp -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Srinivas Sarkar. All rights reserved. Open to DevOps & Site Reliability Engineering roles.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
