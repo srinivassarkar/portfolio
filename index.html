@@ -182,13 +182,15 @@
       margin-bottom: 24px;
     }
 
-    .hero .bio code {
+    code {
+      font-family: var(--font);
       color: var(--green);
       background: var(--green-dim);
-      border: 1px solid rgba(0, 230, 122, 0.2);
+      border: 1px solid rgba(0, 230, 122, 0.15);
       border-radius: 3px;
-      padding: 0 5px;
-      font-size: 0.85em;
+      padding: 1px 4px;
+      font-size: 0.86em;
+      vertical-align: baseline;
     }
 
     .term {
@@ -255,7 +257,7 @@
       margin-bottom: 26px;
     }
 
-    .term-hint code { color: var(--green); }
+
 
     .actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
@@ -638,11 +640,11 @@
         <div class="yrow yind">A structured Terraform reference — from first configuration files to real-world AWS infrastructure automation — distilling battle-tested patterns into a reusable guide.</div>
 
         <div class="yrow"><span class="k">highlights:</span></div>
-        <div class="ylist"><span class="dash">-</span> Progressive coverage — basics, variables, workspaces, and isolated dev/test/prod environments.</div>
-        <div class="ylist"><span class="dash">-</span> Remote S3 backends with native state locking (<code>use_lockfile</code>) and encryption.</div>
-        <div class="ylist"><span class="dash">-</span> Modern practices — <code>-replace</code> over deprecated taint, lifecycle meta-arguments, version pinning.</div>
-        <div class="ylist"><span class="dash">-</span> DRY patterns with dynamic blocks, <code>for_each</code>, and re-usable locals.</div>
-        <div class="ylist"><span class="dash">-</span> Security-first hygiene — state management, IAM roles over static keys, provider aliases.</div>
+        <div class="ylist"><span class="dash">-</span> Progressive coverage: Basics, variables, workspaces, and isolated environments.</div>
+        <div class="ylist"><span class="dash">-</span> Remote state management: S3 backends with native state locking (<code>use_lockfile</code>) and encryption.</div>
+        <div class="ylist"><span class="dash">-</span> Modern patterns: Utilizing <code>-replace</code> over deprecated taint, lifecycle meta-arguments, and version pinning.</div>
+        <div class="ylist"><span class="dash">-</span> DRY principles: Implementing dynamic blocks, <code>for_each</code> expressions, and local variables.</div>
+        <div class="ylist"><span class="dash">-</span> Security hygiene: Secure state storage, IAM roles over static keys, and provider aliases.</div>
 
         <div class="yrow"><span class="k">stack:</span> [Terraform, HCL, AWS, S3 Backend, Workspaces, EC2/VPC]</div>
         <div class="yrow"><span class="k">repo:</span> <a href="https://github.com/srinivassarkar/terraform-journey" target="_blank" rel="noopener" title="github.com/srinivassarkar/terraform-journey">github.com/srinivassarkar/terraform-journey ↗</a></div>
