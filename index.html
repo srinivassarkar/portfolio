@@ -3,908 +3,833 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Srinivas Sarkar | DevOps Engineer & Cloud Architect</title>
-  <meta name="description" content="Portfolio of Srinivas Sarkar, DevOps Engineer & Cloud Architect. Clean, modern, and minimalist developer portfolio with terminal aesthetics.">
-  
-  <!-- Premium Monospace Font for Code/Terminal feel and Clean Body Font -->
+  <title>randomtechy@SrinivasSarkar:~$ — Srinivas Sarkar</title>
+  <meta name="description" content="Srinivas Sarkar — DevOps Engineer & Cloud Architect. Kubernetes, AWS, GitOps, observability. The whole site is a YAML config. Try typing a command.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2306090e'/%3E%3Ctext x='1.5' y='12.5' font-family='monospace' font-size='12' fill='%2300e67a'%3E%3E%3C/text%3E%3C/svg%3E">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* --- COLOR GRADING & VARIABLES (TERMINAL ACCENTS) --- */
     :root {
-      --bg-dark: #080b11;
-      --bg-card: #0f1420;
-      --bg-pill: #171f30;
-      --border-color: #1e293b;
-      --border-hover: #334155;
-      
-      /* Terminal Color Grading */
-      --color-green: #10b981; /* Emerald/Phosphor Green */
-      --color-green-soft: rgba(16, 185, 129, 0.1);
-      --color-amber: #facc15; /* Warm Gold/Amber */
-      --color-amber-glow: rgba(250, 204, 21, 0.05);
-      
-      /* Text Grading */
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      
-      --font-mono: 'Fira Code', monospace;
-      --font-body: 'Inter', sans-serif;
-      
-      --max-width: 900px;
-      --transition-speed: 0.2s;
+      --bg: #06090e;
+      --surface: #0b1017;
+      --border: #1a2331;
+      --border-strong: #2c3a4d;
+      --text: #e3e9f0;
+      --text-2: #94a2b5;
+      --text-3: #5b6a7f;
+      --green: #00e67a;
+      --green-dim: rgba(0, 230, 122, 0.08);
+      --cyan: #7cc7e8;
+      --red: #ff6b6b;
+      --font: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --max-w: 780px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* --- RESET & LAYOUT --- */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
     body {
-      background-color: var(--bg-dark);
-      color: var(--text-primary);
-      font-family: var(--font-body);
-      line-height: 1.6;
-      padding: 0;
-      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.7;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .container {
+    img { max-width: 100%; }
+
+    ::selection { background: var(--green); color: #04170d; }
+
+    ::-webkit-scrollbar { width: 9px; height: 9px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #232e3d; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--green); }
+
+    a:focus-visible, .btn:focus-visible {
+      outline: 1px solid var(--green);
+      outline-offset: 3px;
+    }
+
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(60% 40% at 50% 0%, rgba(0, 230, 122, 0.055), transparent 70%);
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--green), var(--cyan));
+      z-index: 200;
+    }
+
+    .wrap {
       width: 100%;
-      max-width: var(--max-width);
+      max-width: var(--max-w);
       margin: 0 auto;
       padding: 0 24px;
     }
 
-    /* --- FLOATING HEADER --- */
     header {
       position: sticky;
       top: 0;
-      background: rgba(8, 11, 17, 0.9);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-color);
-      z-index: 100;
-      padding: 16px 0;
+      z-index: 150;
+      background: rgba(6, 9, 14, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
     }
 
-    .nav-container {
+    .nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: 58px;
+      gap: 16px;
     }
 
     .logo {
-      font-family: var(--font-mono);
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text-primary);
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text);
       text-decoration: none;
+      white-space: nowrap;
+      letter-spacing: -0.2px;
     }
 
-    .logo span {
-      color: var(--color-green);
+    .logo .u { color: var(--green); }
+    .logo .p { color: var(--text-3); }
+
+    .cursor {
+      display: inline-block;
+      width: 9px;
+      height: 1.05em;
+      margin-left: 3px;
+      background: var(--green);
+      vertical-align: -2px;
+      animation: blink 1.1s steps(1) infinite;
     }
 
-    nav {
-      display: flex;
-      gap: 20px;
-    }
+    nav { display: flex; gap: 22px; }
 
     nav a {
-      color: var(--text-secondary);
+      color: var(--text-2);
       text-decoration: none;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      transition: color var(--transition-speed);
-    }
-
-    nav a:hover {
-      color: var(--color-green);
-    }
-
-    /* --- HERO INTRO --- */
-    .hero {
-      padding: 70px 0 50px 0;
+      font-size: 0.8rem;
       position: relative;
+      transition: color 0.2s;
+      padding: 2px 0;
     }
 
-    /* Subtle Terminal Scanline Overlay on Background */
-    .hero::before {
+    nav a::after {
       content: '';
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(rgba(16, 185, 129, 0.01) 50%, transparent 50%);
-      background-size: 100% 4px;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .hero-content {
-      max-width: 750px;
-    }
-
-    .hero-title {
-      font-family: var(--font-mono);
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -1px;
-      margin-bottom: 12px;
-      color: var(--text-primary);
-    }
-
-    .hero-title span {
-      color: var(--color-green);
-    }
-
-    .hero-subtitle {
-      font-family: var(--font-mono);
-      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
-      font-weight: 600;
-      color: var(--color-amber);
-      margin-bottom: 20px;
-    }
-
-    .hero-bio {
-      color: var(--text-secondary);
-      font-size: 1.05rem;
-      line-height: 1.7;
-      margin-bottom: 28px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 20px;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 600;
-      border-radius: 4px;
-      text-decoration: none;
-      transition: all var(--transition-speed);
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background-color: var(--color-green);
-      color: #041d13;
-    }
-
-    .btn-primary:hover {
-      background-color: #059669;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(16, 185, 129, 0.15);
-    }
-
-    .btn-secondary {
-      border: 1px solid var(--border-color);
-      color: var(--text-primary);
-      background-color: transparent;
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--color-amber);
-      background-color: var(--color-amber-glow);
-      transform: translateY(-2px);
-    }
-
-    /* --- PROFILE BIO CALLOUT --- */
-    .profile-summary {
-      padding: 40px 0;
-    }
-
-    .callout-box {
-      background: rgba(15, 20, 32, 0.6);
-      border-left: 3px solid var(--color-green);
-      border-top: 1px solid var(--border-color);
-      border-right: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-      border-radius: 0 6px 6px 0;
-      padding: 24px;
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-    }
-
-    .callout-box strong {
-      color: var(--text-primary);
-      font-family: var(--font-mono);
-      font-weight: 600;
-    }
-
-    /* --- SECTION SYSTEM TITLES --- */
-    .section-title {
-      font-family: var(--font-mono);
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-title::after {
-      content: '';
-      flex-grow: 1;
+      left: 0;
+      bottom: -2px;
+      width: 0%;
       height: 1px;
-      background: var(--border-color);
+      background: var(--green);
+      transition: width 0.2s var(--ease);
     }
 
-    .section-title span.cmd {
-      color: var(--color-green);
+    nav a:hover, nav a.active { color: var(--text); }
+    nav a:hover::after, nav a.active::after { width: 100%; }
+
+    .hero { padding: 84px 0 64px; }
+
+    .statusline {
+      color: var(--text-2);
+      font-size: 0.8rem;
+      margin-bottom: 26px;
     }
 
-    .section-title span.param {
-      color: var(--text-primary);
-      font-weight: 500;
-    }
+    .statusline .dot { color: var(--green); animation: pulse 2s ease infinite; }
+    .statusline .sep { color: var(--text-3); margin: 0 8px; }
 
-    /* --- SKILLS SECTION --- */
-    .skills {
-      padding: 40px 0;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-
-    @media (min-width: 768px) {
-      .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .skill-card {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 20px;
-      transition: all var(--transition-speed);
-    }
-
-    .skill-card:hover {
-      border-color: var(--color-green);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.04);
-    }
-
-    .skill-category-title {
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
+    .hero h1 {
+      font-size: clamp(2.1rem, 7vw, 3.1rem);
       font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .skill-category-title span.icon {
-      color: var(--color-amber);
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .skill-tag {
-      background-color: var(--bg-pill);
-      border: 1px solid var(--border-color);
-      color: var(--text-secondary);
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      transition: all var(--transition-speed);
-    }
-
-    .skill-tag:hover {
-      color: var(--color-amber);
-      border-color: var(--color-amber);
-      background-color: var(--color-amber-glow);
-    }
-
-    /* --- PROJECTS SECTION --- */
-    .projects {
-      padding: 40px 0;
-    }
-
-    .projects-list {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .project-card {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 24px;
-      transition: all var(--transition-speed);
-    }
-
-    .project-card:hover {
-      border-color: var(--color-green);
-      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.04);
-    }
-
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 12px;
-      gap: 16px;
-    }
-
-    .project-title {
-      font-family: var(--font-mono);
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      text-decoration: none;
-      transition: color var(--transition-speed);
-    }
-
-    .project-title:hover {
-      color: var(--color-green);
-    }
-
-    .project-repo-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      color: var(--color-green);
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-decoration: none;
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      background-color: var(--color-green-soft);
-      padding: 4px 10px;
-      border-radius: 4px;
-      transition: all var(--transition-speed);
-    }
-
-    .project-repo-link:hover {
-      border-color: var(--color-green);
-      background-color: var(--color-green);
-      color: #041d13;
-    }
-
-    .project-description {
-      color: var(--text-secondary);
-      font-size: 0.92rem;
-      margin-bottom: 16px;
-    }
-
-    .project-deliverables {
-      background-color: rgba(8, 11, 17, 0.5);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-
-    .deliverables-title {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      line-height: 1.05;
+      letter-spacing: -2px;
       margin-bottom: 8px;
     }
 
-    .deliverables-list {
-      list-style-type: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+    .hero h1 .accent { color: var(--green); }
+
+    .hero .role {
+      color: var(--text-2);
+      font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+      font-weight: 500;
+      margin-bottom: 22px;
     }
 
-    .deliverable-item {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      padding-left: 18px;
-      position: relative;
+    .hero .bio {
+      color: var(--text-2);
+      max-width: 60ch;
+      margin-bottom: 24px;
     }
 
-    .deliverable-item::before {
-      content: '>';
-      position: absolute;
-      left: 0;
-      color: var(--color-green);
-      font-family: var(--font-mono);
+    .hero .bio code {
+      color: var(--green);
+      background: var(--green-dim);
+      border: 1px solid rgba(0, 230, 122, 0.2);
+      border-radius: 3px;
+      padding: 0 5px;
+      font-size: 0.85em;
     }
 
-    .project-tech-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .project-tech-tag {
-      background-color: var(--bg-pill);
-      border: 1px solid var(--border-color);
-      color: var(--color-amber);
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 4px;
-    }
-
-    /* --- CONTACT SECTION --- */
-    .contact {
-      padding: 40px 0 80px 0;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .contact-card {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-color);
+    .term {
+      border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 20px;
+      background: var(--surface);
+      padding: 16px 18px 14px;
+      margin: 0 0 10px;
+      cursor: text;
+      transition: border-color 0.2s;
+    }
+
+    .term:focus-within { border-color: var(--border-strong); }
+
+    .term-out {
+      max-height: 240px;
+      overflow-y: auto;
+      font-size: 0.84rem;
+      line-height: 1.65;
+    }
+
+    .tr { word-break: break-word; }
+    .tr .tp { color: var(--green); }
+
+    .to {
+      color: var(--text-2);
+      padding-left: 4px;
+      margin: 2px 0 8px;
+      white-space: pre-wrap;
+    }
+
+    .to.err { color: var(--red); }
+
+    .tr + .tr { margin-top: 8px; }
+
+    .term-line {
       display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transition: all var(--transition-speed);
-    }
-
-    .contact-card:hover {
-      border-color: var(--color-amber);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(250, 204, 21, 0.03);
-    }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .contact-label {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--color-green);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    .contact-desc {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
-
-    .contact-btn {
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding: 8px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--color-amber);
-      background-color: transparent;
-      border: 1px solid rgba(250, 204, 21, 0.3);
-      border-radius: 4px;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .term-line .tp { color: var(--green); flex-shrink: 0; font-size: 0.84rem; }
+
+    .term-input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.65;
+      caret-color: var(--green);
+      padding: 0;
+    }
+
+    .term-input::placeholder { color: var(--text-3); }
+
+    .term-hint {
+      font-size: 0.74rem;
+      color: var(--text-3);
+      margin-bottom: 26px;
+    }
+
+    .term-hint code { color: var(--green); }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .btn {
+      font-size: 0.82rem;
+      color: var(--text);
       text-decoration: none;
-      transition: all var(--transition-speed);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      padding: 9px 16px;
+      transition: all 0.2s var(--ease);
     }
 
-    .contact-btn:hover {
-      color: #05070a;
-      background-color: var(--color-amber);
-      border-color: var(--color-amber);
+    .btn:hover {
+      border-color: var(--green);
+      color: var(--green);
+      background: var(--green-dim);
     }
 
-    /* --- FOOTER --- */
+    section { padding: 60px 0; }
+
+    .sec {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    .sec .hash { color: var(--green); }
+
+    .sec::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    .cmd {
+      font-size: 0.8rem;
+      color: var(--text-3);
+      margin-bottom: 18px;
+    }
+
+    .cmd b { color: var(--green); font-weight: 500; }
+
+    .yaml {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 22px 24px;
+      font-size: 0.86rem;
+      line-height: 1.9;
+      overflow-x: auto;
+      transition: border-color 0.2s;
+    }
+
+    .yaml:hover { border-color: var(--border-strong); }
+
+    .yaml + .yaml { margin-top: 18px; }
+
+    .yc { color: var(--text-3); }
+
+    .yrow { white-space: pre-wrap; word-break: break-word; }
+    .yrow + .yrow { margin-top: 2px; }
+
+    .yrow .k, .ylist .k { color: var(--cyan); }
+
+    .ystr { color: var(--green); }
+
+    .yval { color: var(--green); }
+
+    .ylist {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--text-2);
+      padding-left: 24px;
+      margin: 2px 0;
+      word-break: break-word;
+    }
+
+    .ylist .dash { color: var(--green); flex-shrink: 0; }
+
+    .ylist img, .ylist svg { width: 14px; height: 14px; flex-shrink: 0; display: block; }
+
+    .ygroup { padding-left: 24px; }
+
+    .yind { padding-left: 26px; white-space: pre-wrap; word-break: break-word; color: var(--text-2); }
+
+    .yaml a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-strong);
+      transition: all 0.2s;
+      word-break: break-all;
+    }
+
+    .yaml a:hover { color: var(--green); border-color: var(--green); }
+
     footer {
-      border-top: 1px solid var(--border-color);
-      padding: 30px 0;
+      border-top: 1px solid var(--border);
+      padding: 34px 0;
       text-align: center;
-      background-color: #06080d;
+      color: var(--text-3);
+      font-size: 0.76rem;
+      line-height: 2;
     }
 
-    footer p {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
+    footer b { color: var(--green); font-weight: 500; }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+      transition-delay: var(--rd, 0s);
     }
 
-    /* --- MOBILE & EMBED RESPONSIVE MEDIA QUERIES --- */
-    @media (max-width: 600px) {
-      .container {
-        padding: 0 16px;
-      }
+    [data-reveal].revealed { opacity: 1; transform: none; }
 
-      header {
-        padding: 12px 0;
-      }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-      .nav-container {
-        flex-direction: column;
-        gap: 12px;
-        text-align: center;
-      }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
-      nav {
-        gap: 16px;
-      }
+    @media (min-width: 641px) {
+      .term-input { font-size: 0.84rem; }
+    }
 
-      .hero {
-        padding: 40px 0 30px 0;
-      }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 18px; }
 
-      .hero-title {
-        letter-spacing: -0.5px;
-        margin-bottom: 8px;
-      }
+      .nav { flex-direction: column; height: auto; padding: 14px 0; gap: 12px; }
+      .logo { font-size: 0.78rem; }
 
-      .hero-subtitle {
-        margin-bottom: 16px;
-      }
+      nav { gap: 18px; }
 
-      .hero-bio {
-        font-size: 0.95rem;
-        line-height: 1.6;
-        margin-bottom: 24px;
-      }
+      .hero { padding: 52px 0 44px; }
+      .term-out { max-height: 200px; }
 
-      .hero-actions {
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-      }
+      section { padding: 44px 0; }
 
-      .btn {
-        width: 100%;
-        padding: 12px;
-      }
+      .yaml { padding: 16px; font-size: 0.8rem; }
+      .ylist, .ygroup { padding-left: 18px; }
+    }
 
-      .callout-box {
-        padding: 16px;
-        font-size: 0.95rem;
-        line-height: 1.6;
-      }
+    @media (max-width: 420px) {
+      .hero h1 { letter-spacing: -1px; }
+      .actions { flex-direction: column; }
+      .btn { text-align: center; }
+    }
 
-      .section-title {
-        font-size: 1.15rem;
-        margin-bottom: 18px;
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
-
-      .skill-card {
-        padding: 16px;
-      }
-
-      .project-card {
-        padding: 18px;
-      }
-
-      .project-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        margin-bottom: 8px;
-      }
-
-      .project-title {
-        font-size: 1.05rem;
-      }
-
-      .project-repo-link {
-        width: 100%;
-        justify-content: center;
-        padding: 6px;
-      }
-
-      .project-description {
-        font-size: 0.85rem;
-        margin-bottom: 12px;
-      }
-
-      .project-deliverables {
-        padding: 12px;
-        margin-bottom: 12px;
-      }
-
-      .deliverables-title {
-        margin-bottom: 6px;
-      }
-
-      .deliverable-item {
-        font-size: 0.8rem;
-      }
-
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .contact-card {
-        padding: 16px;
-      }
+      [data-reveal] { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Nav Bar Mehehehehe-->
+  <div class="bg-glow"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
   <header>
-    <div class="container nav-container">
-      <a href="#" class="logo">srinivas<span>.</span>sre</a>
+    <div class="wrap nav">
+      <a href="#" class="logo"><span class="u">randomtechy@</span>SrinivasSarkar<span class="p">:~$</span><span class="cursor"></span></a>
       <nav>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+        <a href="#about">about</a>
+        <a href="#skills">skills</a>
+        <a href="#projects">projects</a>
+        <a href="#contact">contact</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Intro Section -->
-  <section class="hero">
-    <div class="container hero-content">
-      <h1 class="hero-title">Srinivas <span>Sarkar</span></h1>
-      <h2 class="hero-subtitle">DevOps Engineer & Cloud Architect</h2>
-      <p class="hero-bio">
-        Specialized in Kubernetes, AWS, GitOps, and building production-grade infrastructure. I focus on automating software delivery cycles, improving platform security, and engineering resilient observability planes.
+  <main class="wrap">
+
+    <section class="hero">
+      <p class="statusline" data-reveal><span class="dot">●</span> Open to DevOps / SRE roles<span class="sep">·</span>Remote-friendly</p>
+
+      <h1 data-reveal style="--rd:.05s">Srinivas <span class="accent">Sarkar</span></h1>
+      <p class="role" data-reveal style="--rd:.1s">DevOps Engineer &amp; Cloud Architect</p>
+
+      <p class="bio" data-reveal style="--rd:.15s">
+        I specialize in <code>Kubernetes</code>, <code>AWS</code>, <code>GitOps</code>, and building production-grade
+        infrastructure. I automate software delivery cycles, harden cloud platform security, and engineer
+        resilient observability planes — keeping production boring and stable.
       </p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+
+      <div class="term" id="term" data-reveal style="--rd:.2s" aria-label="Interactive terminal. Click and type a command.">
+        <div class="term-out" id="termOut"></div>
+        <div class="term-line">
+          <span class="tp">randomtechy@SrinivasSarkar:~$</span>
+          <input class="term-input" id="termInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="type a command…" aria-label="Terminal input" enterkeyhint="send">
+        </div>
       </div>
-    </div>
-  </section>
 
-  <!-- About Callout Section -->
-  <section id="about" class="profile-summary">
-    <div class="container">
-      <div class="callout-box">
-        <strong>Transitioning from Node.js development to DevOps engineering.</strong> I bring a strong background in software engineering into operations. My architectural approach prioritizes security, automation, and full-stack observability, ensuring production stability while keeping systems clean and simple.
+      <p class="term-hint" data-reveal style="--rd:.25s">interactive — tap and try <code>help</code> · <code>whoami</code> · <code>cat about.yaml</code> · <code>ping prod</code></p>
+
+      <div class="actions" data-reveal style="--rd:.3s">
+        <a href="#projects" class="btn">[ view projects ]</a>
+        <a href="#contact" class="btn">[ contact ]</a>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Technical Expertise Section -->
-  <section id="skills" class="skills">
-    <div class="container">
-      <h2 class="section-title"><span class="cmd">cat</span> <span class="param">technical_expertise.sh</span></h2>
-      <div class="skills-grid">
-        
-        <!-- Category 1 -->
-        <div class="skill-card">
-          <h3 class="skill-category-title"><span class="icon">☁️</span> Cloud & Infrastructure</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">AWS EKS</span>
-            <span class="skill-tag">Terraform</span>
-            <span class="skill-tag">VPC Design</span>
-            <span class="skill-tag">IAM/IRSA</span>
-            <span class="skill-tag">ECR</span>
-          </div>
+    <section id="about" data-reveal>
+      <h2 class="sec"><span class="hash">##</span> about</h2>
+      <p class="cmd"><b>$</b> cat about.yaml</p>
+
+      <div class="yaml">
+        <p class="yc"># about.yaml</p>
+
+        <div class="yrow"><span class="k">name:</span> Srinivas Sarkar</div>
+        <div class="yrow"><span class="k">role:</span> DevOps Engineer &amp; Cloud Architect</div>
+        <div class="yrow"><span class="k">tagline:</span> <span class="ystr">"I build platforms that enable engineering teams to ship faster, safer, and with confidence."</span></div>
+
+        <div class="yrow"><span class="k">focus:</span></div>
+        <div class="ylist"><span class="dash">-</span> Kubernetes</div>
+        <div class="ylist"><span class="dash">-</span> AWS EKS</div>
+        <div class="ylist"><span class="dash">-</span> Terraform</div>
+        <div class="ylist"><span class="dash">-</span> GitOps with ArgoCD</div>
+        <div class="ylist"><span class="dash">-</span> Full-Stack Observability</div>
+
+        <div class="yrow"><span class="k">principles:</span> [Secure by default, Observable by design, Automated wherever possible]</div>
+
+        <div class="yrow"><span class="k">company:</span> iProtechs</div>
+        <div class="yrow"><span class="k">responsibilities:</span> [Production deployments, Distributed microservices, API security (JWT/OIDC), Incident response]</div>
+
+        <div class="yrow"><span class="k">exploring:</span></div>
+        <div class="ylist"><span class="dash">-</span> LLM-assisted anomaly detection on Prometheus streams</div>
+        <div class="ylist"><span class="dash">-</span> GitHub Copilot in CI workflows</div>
+        <div class="ylist"><span class="dash">-</span> Intelligent alerting beyond static thresholds</div>
+
+        <div class="yrow"><span class="k">open_to:</span></div>
+        <div class="ylist"><span class="dash">-</span> <span class="yval">Platform Engineering</span></div>
+        <div class="ylist"><span class="dash">-</span> <span class="yval">SRE</span></div>
+        <div class="ylist"><span class="dash">-</span> <span class="yval">DevSecOps</span></div>
+        <div class="ylist"><span class="dash">-</span> <span class="yval">Cloud Infrastructure</span></div>
+
+        <div class="yrow"><span class="k">achievements:</span></div>
+        <div class="ygroup">
+          <div class="yrow"><span class="k"><span class="dash">-</span> achievement:</span> Infrastructure Automation (EKS &amp; Terraform)</div>
+          <div class="yrow yind"><span class="k">impact:</span> Cut environment setup time from hours to under 15 minutes</div>
+          <div class="yrow"><span class="k"><span class="dash">-</span> achievement:</span> GitOps Migration (ArgoCD)</div>
+          <div class="yrow yind"><span class="k">impact:</span> Eliminated 95%+ of manual operations via self-healing and drift detection</div>
+          <div class="yrow"><span class="k"><span class="dash">-</span> achievement:</span> Multi-Cluster Orchestration</div>
+          <div class="yrow yind"><span class="k">impact:</span> Reduced deployment operational overhead by 70%+ using ApplicationSets</div>
+          <div class="yrow"><span class="k"><span class="dash">-</span> achievement:</span> DevSecOps Pipeline Integration</div>
+          <div class="yrow yind"><span class="k">impact:</span> Integrated vulnerability scanning (Trivy, Semgrep) to block insecure builds</div>
+          <div class="yrow"><span class="k"><span class="dash">-</span> achievement:</span> Enterprise Observability Plane</div>
+          <div class="yrow yind"><span class="k">impact:</span> Deployed Prometheus, Grafana, Loki, and Jaeger across all microservices</div>
+          <div class="yrow"><span class="k"><span class="dash">-</span> achievement:</span> Platform Automation (Python)</div>
+          <div class="yrow yind"><span class="k">impact:</span> Built automated health checks, dynamic alert routing, and deployment reports</div>
         </div>
 
-        <!-- Category 2 -->
-        <div class="skill-card">
-          <h3 class="skill-category-title"><span class="icon">☸️</span> Kubernetes & GitOps</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">ArgoCD</span>
-            <span class="skill-tag">Kustomize</span>
-            <span class="skill-tag">Helm</span>
-            <span class="skill-tag">ApplicationSets</span>
-            <span class="skill-tag">Multi-cluster</span>
-          </div>
-        </div>
-
-        <!-- Category 3 -->
-        <div class="skill-card">
-          <h3 class="skill-category-title"><span class="icon">📊</span> Full-Stack Observability</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">Prometheus</span>
-            <span class="skill-tag">Grafana</span>
-            <span class="skill-tag">Loki</span>
-            <span class="skill-tag">Jaeger</span>
-            <span class="skill-tag">OpenTelemetry</span>
-          </div>
-        </div>
-
-        <!-- Category 4 -->
-        <div class="skill-card">
-          <h3 class="skill-category-title"><span class="icon">🔒</span> CI/CD & DevSecOps</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">GitHub Actions</span>
-            <span class="skill-tag">OIDC</span>
-            <span class="skill-tag">Trivy</span>
-            <span class="skill-tag">cert-manager</span>
-            <span class="skill-tag">NGINX Ingress</span>
-          </div>
-        </div>
-
+        <div class="yrow"><span class="k">stack:</span> [AWS, Kubernetes, Terraform, ArgoCD, GitHub Actions, Prometheus, Grafana, Loki, Jaeger, Python, Docker, Helm, DevSecOps]</div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Featured Missions Section -->
-  <section id="projects" class="projects">
-    <div class="container">
-      <h2 class="section-title"><span class="cmd">./list_projects</span> <span class="param">--verbose</span></h2>
-      <div class="projects-list">
-        
-        <!-- Project 1 -->
-        <article class="project-card">
-          <div class="project-header">
-            <h3 class="project-title">ArgoCD Hub-Spoke Multi-Cluster Architecture</h3>
-            <a href="https://github.com/srinivassarkar/argocd-hub-spoke-eks" class="project-repo-link" target="_blank">
-              GitHub →
-            </a>
-          </div>
-          <p class="project-description">
-            Production-grade GitOps implementation featuring automated TLS certificate management, multi-cluster orchestration, and zero-downtime deployments using ArgoCD ApplicationSets on AWS EKS.
-          </p>
-          <div class="project-deliverables">
-            <div class="deliverables-title">Key Accomplishments</div>
-            <ul class="deliverables-list">
-              <li class="deliverable-item">Implemented hub-spoke topology managing multiple EKS clusters from a single ArgoCD instance.</li>
-              <li class="deliverable-item">Automated TLS certificate management using cert-manager with Let's Encrypt.</li>
-              <li class="deliverable-item">Configured SSL passthrough with NGINX Ingress for full gRPC support.</li>
-              <li class="deliverable-item">Built ApplicationSet patterns for automatic multi-cluster deployments.</li>
-              <li class="deliverable-item">Created automated tooling installation script for reproducible environments.</li>
-            </ul>
-          </div>
-          <div class="project-tech-stack">
-            <span class="project-tech-tag">AWS EKS</span>
-            <span class="project-tech-tag">ArgoCD</span>
-            <span class="project-tech-tag">ApplicationSets</span>
-            <span class="project-tech-tag">cert-manager</span>
-            <span class="project-tech-tag">NGINX Ingress</span>
-            <span class="project-tech-tag">Helm</span>
-            <span class="project-tech-tag">eksctl</span>
-          </div>
-        </article>
+    <section id="skills" data-reveal>
+      <h2 class="sec"><span class="hash">##</span> skills</h2>
+      <p class="cmd"><b>$</b> cat ~/.skills.yaml</p>
 
-        <!-- Project 2 -->
-        <article class="project-card">
-          <div class="project-header">
-            <h3 class="project-title">Kubernetes Observability Stack for Microservices</h3>
-            <a href="https://github.com/srinivassarkar/voting_app_observability_devops" class="project-repo-link" target="_blank">
-              GitHub →
-            </a>
-          </div>
-          <p class="project-description">
-            End-to-end observability setup for a Kubernetes-based microservices application with metrics, logs, distributed tracing, and load testing in a production-like environment.
-          </p>
-          <div class="project-deliverables">
-            <div class="deliverables-title">Key Accomplishments</div>
-            <ul class="deliverables-list">
-              <li class="deliverable-item">Deployed complete observability stack: Prometheus, Grafana, Loki, and Jaeger.</li>
-              <li class="deliverable-item">Implemented centralized logging with Loki and Promtail across all namespaces.</li>
-              <li class="deliverable-item">Configured distributed tracing backend with OpenTelemetry Collector.</li>
-              <li class="deliverable-item">Built distributed load testing setup using Locust master-worker architecture.</li>
-              <li class="deliverable-item">Documented real-world troubleshooting and production-style debugging.</li>
-            </ul>
-          </div>
-          <div class="project-tech-stack">
-            <span class="project-tech-tag">Kubernetes</span>
-            <span class="project-tech-tag">Prometheus</span>
-            <span class="project-tech-tag">Grafana</span>
-            <span class="project-tech-tag">Loki</span>
-            <span class="project-tech-tag">Jaeger</span>
-            <span class="project-tech-tag">OpenTelemetry</span>
-            <span class="project-tech-tag">Locust</span>
-            <span class="project-tech-tag">Kind</span>
-          </div>
-        </article>
+      <div class="yaml">
+        <p class="yc"># ~/.skills.yaml</p>
 
-        <!-- Project 3 -->
-        <article class="project-card">
-          <div class="project-header">
-            <h3 class="project-title">Secure GitOps CI/CD Pipeline on AWS EKS</h3>
-            <a href="https://github.com/srinivassarkar/color-palette-eks-ci-cd" class="project-repo-link" target="_blank">
-              GitHub →
-            </a>
-          </div>
-          <p class="project-description">
-            Production-grade DevSecOps project demonstrating secure, automated deployment pipeline using Terraform, AWS EKS, GitHub Actions OIDC, and ArgoCD following GitOps principles.
-          </p>
-          <div class="project-deliverables">
-            <div class="deliverables-title">Key Accomplishments</div>
-            <ul class="deliverables-list">
-              <li class="deliverable-item">Implemented zero-credential CI/CD using GitHub Actions OIDC with AWS IAM.</li>
-              <li class="deliverable-item">Built complete Terraform modules for VPC, EKS, and ECR with IRSA.</li>
-              <li class="deliverable-item">Configured immutable container images with automated SHA-based tagging.</li>
-              <li class="deliverable-item">Integrated security scanning: SAST (Semgrep), dependency audit, and Trivy image scanning.</li>
-              <li class="deliverable-item">Achieved true GitOps with auto-sync, drift detection, and self-healing.</li>
-              <li class="deliverable-item">Documented real-world challenges: IAM access entries, IRSA trust policies, LoadBalancer behavior.</li>
-            </ul>
-          </div>
-          <div class="project-tech-stack">
-            <span class="project-tech-tag">AWS EKS</span>
-            <span class="project-tech-tag">Terraform</span>
-            <span class="project-tech-tag">GitHub Actions</span>
-            <span class="project-tech-tag">ArgoCD</span>
-            <span class="project-tech-tag">Kustomize</span>
-            <span class="project-tech-tag">OIDC</span>
-            <span class="project-tech-tag">IRSA</span>
-            <span class="project-tech-tag">ECR</span>
-            <span class="project-tech-tag">Trivy</span>
-          </div>
-        </article>
+        <div class="yrow"><span class="k">cloud:</span></div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/amazonaws/FF9900" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">AWS EKS</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/terraform/7B42BC" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Terraform</div>
+        <div class="ylist"><span class="dash">-</span> VPC Design</div>
+        <div class="ylist"><span class="dash">-</span> IAM / IRSA</div>
+        <div class="ylist"><span class="dash">-</span> ECR</div>
 
+        <div class="yrow"><span class="k">gitops:</span></div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/kubernetes/326CE5" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Kubernetes</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/argocd/EF7B4D" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">ArgoCD</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/helm/E6E6E6" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Helm</div>
+        <div class="ylist"><span class="dash">-</span> Kustomize</div>
+        <div class="ylist"><span class="dash">-</span> ApplicationSets</div>
+        <div class="ylist"><span class="dash">-</span> Multi-cluster</div>
+
+        <div class="yrow"><span class="k">observability:</span></div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/prometheus/E6522C" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Prometheus</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/grafana/F46800" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Grafana</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/loki/F75D1B" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Loki</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/jaeger/66CFE3" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Jaeger</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/opentelemetry/E6E6E6" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">OpenTelemetry</div>
+
+        <div class="yrow"><span class="k">devsecops:</span></div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/githubactions/2088FF" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">GitHub Actions</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/trivy/E6E6E6" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Trivy</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/semgrep/00C98D" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Semgrep</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/nginx/009639" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">NGINX</div>
+        <div class="ylist"><span class="dash">-</span> OIDC</div>
+        <div class="ylist"><span class="dash">-</span> cert-manager</div>
+
+        <div class="yrow"><span class="k">automation:</span></div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/python/3776AB" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Python</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/docker/2496ED" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Docker</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/git/F05032" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Git</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/linux/FCC624" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Linux</div>
+        <div class="ylist"><span class="dash">-</span><img src="https://cdn.simpleicons.org/ansible/EE0000" alt="" width="14" height="14" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">Ansible</div>
+        <div class="ylist"><span class="dash">-</span> Bash</div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact Channels Section -->
-  <section id="contact" class="contact">
-    <div class="container">
-      <h2 class="section-title"><span class="cmd">ping</span> <span class="param">contact_channels</span></h2>
-      <div class="contact-grid">
-        
-        <!-- Email -->
-        <div class="contact-card">
-          <div class="contact-info">
-            <span class="contact-label">Email</span>
-            <span class="contact-desc">Send a direct message</span>
-          </div>
-          <a href="mailto:srinivassarkar07@gmail.com" class="contact-btn">srinivassarkar07@gmail.com</a>
-        </div>
+    <section id="projects" data-reveal>
+      <h2 class="sec"><span class="hash">##</span> projects</h2>
+      <p class="cmd"><b>$</b> ls projects/</p>
 
-        <!-- LinkedIn -->
-        <div class="contact-card">
-          <div class="contact-info">
-            <span class="contact-label">LinkedIn</span>
-            <span class="contact-desc">Connect professionally</span>
-          </div>
-          <a href="https://linkedin.com/in/srinivassarkar-049320212/" target="_blank" class="contact-btn">Connect on LinkedIn</a>
-        </div>
+      <div class="yaml" data-reveal style="--rd:.05s">
+        <p class="yc"># projects/01_argocd_hub_spoke_eks.yaml</p>
 
-        <!-- GitHub -->
-        <div class="contact-card">
-          <div class="contact-info">
-            <span class="contact-label">GitHub</span>
-            <span class="contact-desc">View code repositories</span>
-          </div>
-          <a href="https://github.com/srinivassarkar" target="_blank" class="contact-btn">View GitHub Profile</a>
-        </div>
+        <div class="yrow"><span class="k">title:</span> ArgoCD Hub-Spoke Multi-Cluster Architecture</div>
+        <div class="yrow"><span class="k">category:</span> <span class="yval">GitOps / Multi-Cluster</span></div>
+        <div class="yrow"><span class="k">description:</span> <span class="ystr">&gt;</span></div>
+        <div class="yrow yind">Production-grade GitOps implementation with automated TLS, multi-cluster orchestration, and zero-downtime deployments via ArgoCD ApplicationSets on AWS EKS.</div>
 
+        <div class="yrow"><span class="k">highlights:</span></div>
+        <div class="ylist"><span class="dash">-</span> Hub-spoke topology managing multiple EKS clusters from one ArgoCD instance.</div>
+        <div class="ylist"><span class="dash">-</span> Automated TLS certificate management using cert-manager + Let's Encrypt.</div>
+        <div class="ylist"><span class="dash">-</span> SSL passthrough with NGINX Ingress for full gRPC support.</div>
+        <div class="ylist"><span class="dash">-</span> ApplicationSet patterns for automatic multi-cluster deployments.</div>
+        <div class="ylist"><span class="dash">-</span> Automated tooling installation script for reproducible environments.</div>
+
+        <div class="yrow"><span class="k">stack:</span> [AWS EKS, ArgoCD, ApplicationSets, cert-manager, NGINX Ingress, Helm, eksctl]</div>
+        <div class="yrow"><span class="k">repo:</span> <a href="https://github.com/srinivassarkar/argocd-hub-spoke-eks" target="_blank" rel="noopener" title="github.com/srinivassarkar/argocd-hub-spoke-eks">github.com/srinivassarkar/argocd-hub-spoke-eks ↗</a></div>
       </div>
-    </div>
-  </section>
 
-  <!-- Footer Stamp -->
+      <div class="yaml" data-reveal style="--rd:.1s">
+        <p class="yc"># projects/02_voting_app_observability.yaml</p>
+
+        <div class="yrow"><span class="k">title:</span> Kubernetes Observability Stack for Microservices</div>
+        <div class="yrow"><span class="k">category:</span> <span class="yval">Observability / Telemetry</span></div>
+        <div class="yrow"><span class="k">description:</span> <span class="ystr">&gt;</span></div>
+        <div class="yrow yind">End-to-end observability for a Kubernetes microservices app — metrics, logs, tracing, and load testing in a production-like environment.</div>
+
+        <div class="yrow"><span class="k">highlights:</span></div>
+        <div class="ylist"><span class="dash">-</span> Complete stack: Prometheus, Grafana, Loki, and Jaeger.</div>
+        <div class="ylist"><span class="dash">-</span> Centralized logging with Loki + Promtail across all namespaces.</div>
+        <div class="ylist"><span class="dash">-</span> Distributed tracing backend with OpenTelemetry Collector.</div>
+        <div class="ylist"><span class="dash">-</span> Load testing via Locust master-worker architecture.</div>
+        <div class="ylist"><span class="dash">-</span> Real-world troubleshooting and production-style debugging documented.</div>
+
+        <div class="yrow"><span class="k">stack:</span> [Kubernetes, Prometheus, Grafana, Loki, Jaeger, OpenTelemetry, Locust, Kind]</div>
+        <div class="yrow"><span class="k">repo:</span> <a href="https://github.com/srinivassarkar/voting_app_observability_devops" target="_blank" rel="noopener" title="github.com/srinivassarkar/voting_app_observability_devops">github.com/srinivassarkar/voting_app_observability_devops ↗</a></div>
+      </div>
+
+      <div class="yaml" data-reveal style="--rd:.15s">
+        <p class="yc"># projects/03_color_palette_eks_ci_cd.yaml</p>
+
+        <div class="yrow"><span class="k">title:</span> Secure GitOps CI/CD Pipeline on AWS EKS</div>
+        <div class="yrow"><span class="k">category:</span> <span class="yval">DevSecOps / CI-CD</span></div>
+        <div class="yrow"><span class="k">description:</span> <span class="ystr">&gt;</span></div>
+        <div class="yrow yind">DevSecOps flagship: secure, automated deployment with Terraform, AWS EKS, GitHub Actions OIDC, and ArgoCD following true GitOps principles.</div>
+
+        <div class="yrow"><span class="k">highlights:</span></div>
+        <div class="ylist"><span class="dash">-</span> Zero-credential CI/CD with GitHub Actions OIDC + AWS IAM.</div>
+        <div class="ylist"><span class="dash">-</span> Complete Terraform modules for VPC, EKS, and ECR with IRSA.</div>
+        <div class="ylist"><span class="dash">-</span> Immutable images with automated SHA-based tagging.</div>
+        <div class="ylist"><span class="dash">-</span> Security scanning: Semgrep SAST, dependency audit, Trivy image scan.</div>
+        <div class="ylist"><span class="dash">-</span> True GitOps — auto-sync, drift detection, and self-healing.</div>
+        <div class="ylist"><span class="dash">-</span> Real-world war stories: IAM access entries, IRSA trust, LoadBalancer behavior.</div>
+
+        <div class="yrow"><span class="k">stack:</span> [AWS EKS, Terraform, GitHub Actions, ArgoCD, Kustomize, OIDC, IRSA, ECR, Trivy]</div>
+        <div class="yrow"><span class="k">repo:</span> <a href="https://github.com/srinivassarkar/color-palette-eks-ci-cd" target="_blank" rel="noopener" title="github.com/srinivassarkar/color-palette-eks-ci-cd">github.com/srinivassarkar/color-palette-eks-ci-cd ↗</a></div>
+      </div>
+
+      <div class="yaml" data-reveal style="--rd:.2s">
+        <p class="yc"># projects/04_terraform_journey.yaml</p>
+
+        <div class="yrow"><span class="k">title:</span> Terraform End-to-End — IaC Foundations to AWS Automation</div>
+        <div class="yrow"><span class="k">category:</span> <span class="yval">Infrastructure as Code</span></div>
+        <div class="yrow"><span class="k">description:</span> <span class="ystr">&gt;</span></div>
+        <div class="yrow yind">A structured Terraform reference — from first configuration files to real-world AWS infrastructure automation — distilling battle-tested patterns into a reusable guide.</div>
+
+        <div class="yrow"><span class="k">highlights:</span></div>
+        <div class="ylist"><span class="dash">-</span> Progressive coverage — basics, variables, workspaces, and isolated dev/test/prod environments.</div>
+        <div class="ylist"><span class="dash">-</span> Remote S3 backends with native state locking (<code>use_lockfile</code>) and encryption.</div>
+        <div class="ylist"><span class="dash">-</span> Modern practices — <code>-replace</code> over deprecated taint, lifecycle meta-arguments, version pinning.</div>
+        <div class="ylist"><span class="dash">-</span> DRY patterns with dynamic blocks, <code>for_each</code>, and re-usable locals.</div>
+        <div class="ylist"><span class="dash">-</span> Security-first hygiene — state management, IAM roles over static keys, provider aliases.</div>
+
+        <div class="yrow"><span class="k">stack:</span> [Terraform, HCL, AWS, S3 Backend, Workspaces, EC2/VPC]</div>
+        <div class="yrow"><span class="k">repo:</span> <a href="https://github.com/srinivassarkar/terraform-journey" target="_blank" rel="noopener" title="github.com/srinivassarkar/terraform-journey">github.com/srinivassarkar/terraform-journey ↗</a></div>
+      </div>
+    </section>
+
+    <section id="contact" data-reveal>
+      <h2 class="sec"><span class="hash">##</span> contact</h2>
+      <p class="cmd"><b>$</b> cat contacts.yaml</p>
+
+      <div class="yaml">
+        <p class="yc"># contacts.yaml</p>
+
+        <div class="yrow"><span class="k">status:</span> <span class="yval">ACTIVE</span> <span class="ystr">—</span> open to DevOps / SRE roles</div>
+
+        <div class="yrow"><span class="k">channels:</span></div>
+        <div class="ylist">
+          <span class="dash">-</span>
+          <svg viewBox="0 0 24 24" fill="#EA4335"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.164-3.284 3.92-2.284L12 8.21l8.08-5.037c1.77-1.009 3.92.251 3.92 2.284z"/></svg>
+          <span><span class="k">email:</span> <a href="mailto:srinivassarkar07@gmail.com" title="srinivassarkar07@gmail.com">srinivassarkar07@gmail.com</a></span>
+        </div>
+        <div class="ylist">
+          <span class="dash">-</span>
+          <svg viewBox="0 0 24 24" fill="#E6E6E6"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          <span><span class="k">github:</span> <a href="https://github.com/srinivassarkar" target="_blank" rel="noopener" title="github.com/srinivassarkar">github.com/srinivassarkar</a></span>
+        </div>
+        <div class="ylist">
+          <span class="dash">-</span>
+          <svg viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <span><span class="k">linkedin:</span> <a href="https://linkedin.com/in/srinivassarkar-049320212/" target="_blank" rel="noopener" title="linkedin.com/in/srinivassarkar-049320212">linkedin.com/in/srinivassarkar-049320212</a></span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
   <footer>
-    <div class="container">
-      <p>© 2026 Srinivas Sarkar. All rights reserved. Open to DevOps & Site Reliability Engineering roles.</p>
+    <div class="wrap">
+      <p><b>randomtechy@SrinivasSarkar:~$</b> exit 0</p>
+      <p>© 2026 Srinivas Sarkar · built with excessive YAML &amp; 0% downtime</p>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      var PROMPT = 'randomtechy@SrinivasSarkar:~$';
+      var term = document.getElementById('term');
+      var termOut = document.getElementById('termOut');
+      var termInput = document.getElementById('termInput');
+
+      function addLine(text) {
+        var d = document.createElement('div');
+        d.className = 'tr';
+        var p = document.createElement('span');
+        p.className = 'tp';
+        p.textContent = PROMPT + ' ';
+        var c = document.createElement('span');
+        c.textContent = text;
+        d.appendChild(p);
+        d.appendChild(c);
+        termOut.appendChild(d);
+      }
+
+      function addOut(text, err) {
+        var d = document.createElement('div');
+        d.className = 'to' + (err ? ' err' : '');
+        d.textContent = text;
+        termOut.appendChild(d);
+      }
+
+      function scrollOut() { termOut.scrollTop = termOut.scrollHeight; }
+
+      function run(cmd) {
+        var out = [];
+        switch (cmd) {
+          case 'whoami':
+            out.push('Srinivas Sarkar — DevOps Engineer & Cloud Architect');
+            break;
+          case 'about':
+          case 'cat about.yaml':
+            out.push('I build platforms that let engineering teams ship faster, safer, and with confidence.');
+            out.push('focus: Kubernetes · AWS EKS · Terraform · ArgoCD · observability');
+            break;
+          case 'skills':
+          case 'cat skills.yaml':
+            out.push('AWS · Kubernetes · Terraform · ArgoCD · GitHub Actions · Prometheus · Grafana · Loki · Jaeger · Python · Docker · Helm · DevSecOps');
+            break;
+          case 'projects':
+          case 'ls projects':
+            out.push('1. ArgoCD Hub-Spoke Multi-Cluster Architecture');
+            out.push('2. Kubernetes Observability Stack for Microservices');
+            out.push('3. Secure GitOps CI/CD Pipeline on AWS EKS');
+            out.push('4. Terraform End-to-End — IaC to AWS Automation');
+            break;
+          case 'contact':
+          case 'cat contacts.yaml':
+            out.push('email: srinivassarkar07@gmail.com');
+            out.push('github: github.com/srinivassarkar');
+            out.push('linkedin: linkedin.com/in/srinivassarkar-049320212');
+            break;
+          case 'ping prod':
+            out.push('PING prod: 0% packet loss · zero-downtime deploys');
+            break;
+          case 'sudo hire-me':
+            out.push('permission granted — status: available for hire');
+            break;
+          case 'help':
+          case 'ls':
+          case '?':
+            out.push('available commands:');
+            out.push('  whoami · about · skills · projects · contact');
+            out.push('  cat about.yaml · ping prod · sudo hire-me · clear');
+            break;
+          case 'clear':
+            termOut.innerHTML = '';
+            scrollOut();
+            return;
+          default:
+            addOut("command not found: " + cmd + " — try 'help'", true);
+            return;
+        }
+        for (var i = 0; i < out.length; i++) addOut(out[i]);
+        scrollOut();
+      }
+
+      function submit() {
+        var v = termInput.value.trim();
+        if (!v) return;
+        addLine(v);
+        termInput.value = '';
+        run(v);
+        scrollOut();
+      }
+
+      termInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); submit(); }
+      });
+
+      term.addEventListener('pointerdown', function (e) {
+        if (e.target !== termInput) { e.preventDefault(); termInput.focus(); }
+      });
+
+      addLine('whoami');
+      addOut('Srinivas Sarkar — DevOps Engineer & Cloud Architect');
+      addLine('help');
+      addOut('type a command below. try: about · skills · projects · contact · ping prod · clear');
+      scrollOut();
+
+      var revealEls = document.querySelectorAll('[data-reveal]');
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('revealed');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      revealEls.forEach(function (el) { io.observe(el); });
+
+      var sections = document.querySelectorAll('main section[id]');
+      var navLinks = document.querySelectorAll('nav a');
+      var navIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+            });
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px' });
+      sections.forEach(function (s) { navIo.observe(s); });
+
+      var progress = document.getElementById('scrollProgress');
+      function updateProgress() {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+
+      if (reduceMotion) {
+        revealEls.forEach(function (el) { el.classList.add('revealed'); });
+      }
+    })();
+  </script>
 
 </body>
 </html>
